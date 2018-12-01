@@ -32,13 +32,17 @@ public class Hacker : MonoBehaviour {
 	}
 
 	void OnUserInput (string input) {
-		if (input == "menu") {
+		string normalizedInput = input.ToLower ();
+		if (normalizedInput == "menu") {
 			currentScreen = Screen.MainMenu;
 			ShowMainMenu ();
+		} else if (normalizedInput == "quit" || normalizedInput == "close" || normalizedInput == "exit") {
+			Terminal.WriteLine ("If on the web, close the tab!");
+			Application.Quit ();
 		} else if (currentScreen == Screen.MainMenu) {
-			RunMainMenu (input);
+			RunMainMenu (normalizedInput);
 		} else if (currentScreen == Screen.Password) {
-			CheckPassword (input);
+			CheckPassword (normalizedInput);
 		}
 	}
 
@@ -95,6 +99,7 @@ public class Hacker : MonoBehaviour {
 		switch (level) {
 			case 1:
 				Terminal.WriteLine ("Have a book...");
+				Terminal.WriteLine ("Play again for a greater challenge");
 				Terminal.WriteLine (@"
     ________
    /       //
@@ -102,16 +107,15 @@ public class Hacker : MonoBehaviour {
  /______ //
 (_______(/
 				");
-				Terminal.WriteLine ("Play again for a greater challenge");
 				break;
 			case 2:
 				Terminal.WriteLine ("You got the prison key!");
+				Terminal.WriteLine ("Play again for a greater challenge");
 				Terminal.WriteLine (@"
  ___
 /0  \_______
 \___/\/\/-\/
 				");
-				Terminal.WriteLine ("Play again for a greater challenge");
 				break;
 			case 3:
 				Terminal.WriteLine (@"
